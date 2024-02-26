@@ -1,5 +1,5 @@
 // c 2024-02-02
-// m 2024-02-07
+// m 2024-02-08
 
 bool         queueJoin  = false;
 bool         queueOk    = false;
@@ -69,20 +69,28 @@ void Render() {
         return;
 
     UI::Begin(title, S_Show, UI::WindowFlags::None);
+        UI::BeginDisabled(queueJoin);
         if (UI::Button("Join"))
             queueJoin = true;
+        UI::EndDisabled();
 
         UI::Separator();
 
+        UI::BeginDisabled(queueOk);
         if (UI::Button("OK"))
             queueOk = true;
+        UI::EndDisabled();
 
+        UI::BeginDisabled(queueLeave);
         if (UI::Button("Leave"))
             queueLeave = true;
+        UI::EndDisabled();
 
         UI::SameLine();
+        UI::BeginDisabled(queueStay);
         if (UI::Button("Stay"))
             queueStay = true;
+        UI::EndDisabled();
     UI::End();
 }
 
@@ -132,7 +140,7 @@ void Loop() {
 
                 if (queueOk) {
                     queueOk = false;
-                    ClickButton(Layer.LocalPage.GetFirstChild("button-ok"));
+                    ClickButton(Layer.LocalPage.GetFirstChild("ComponentTrackmania_Button_quad-background"));
                     yield();
                     return;
                 }
